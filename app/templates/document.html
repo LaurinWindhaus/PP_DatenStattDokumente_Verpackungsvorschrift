@@ -1,0 +1,268 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <meta charset="UTF-8">
+        <style>
+            @page {
+              size: A4 portrait; /* or use 'landscape' */
+              margin: 0.3cm;
+              margin-top: -1cm;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="image_count" hidden>{{ images_count }}</p>
+        <p id="images" hidden>{{ images_data }}</p>
+        <p id="document_id" hidden>{{ document.document_id }}</p>
+        <div class="container">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="toogle_edit_mode" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Bearbeitungsmodus</label>
+            </div>
+        </div>
+        <div class="container border mt-5">
+            <!-- Section 1 -->
+            <div class="row">
+                <div class="col-7 border">
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex align-items-center">
+                                <h3 class="text-primary mb-0">Verpackungsvorschrift</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p><b>Hauptpackvorschrift:</b></p>
+                        </div>
+                        <div class="col-9">
+                            <p id="artikelnummer">{% if document.hauptpackvorschrift %}{{document.hauptpackvorschrift}}{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 border">
+                    <div class="row">
+                        <div class="col-5 border">
+                            <input type="text" class="form-control" disabled style="background-color: white; border: none; outline: none;" value="Datum:">
+                        </div>
+                        <div class="col-7 border">
+                            <input type="text" class="form-control value" id="datum" value="{% if document.data.datum %} {{ document.data.datum }} {% endif %}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 border">
+                            <input type="text" class="form-control" disabled style="background-color: white; border: none; outline: none;" value="Änderungsstand:">
+                        </div>
+                        <div class="col-7 border">
+                            <input type="text" class="form-control" id="aenderungsstand" value="{% if document.data.aenderungsstand %} {{ document.data.aenderungsstand }} {% endif %}" style="background-color: white; border: none; outline: none;" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 border">
+                            <input type="text" class="form-control" disabled style="background-color: white; border: none; outline: none;" value="Freigabe:">
+                        </div>
+                        <div class="col-7 border">
+                            <input type="text" class="form-control value" id="freigabe" value="{% if document.data.freigabe %} {{ document.data.freigabe }} {% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="row">
+                <div class="col-12 border">
+                    <p>HPV:</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 border">
+                    <p><b>komponenten:</b></p>
+                </div>
+                <div class="col-1 border">
+                    <p><b>Anzahl:</b></p>
+                </div>
+                <div class="col-3 border">
+                    <p><b>komponenten:</b></p>
+                </div>
+                <div class="col-1 border">
+                    <p><b>Anzahl:</b></p>
+                </div>
+                <div class="col-3 border">
+                    <p><b>komponenten:</b></p>
+                </div>
+                <div class="col-1 border">
+                    <p><b>Anzahl:</b></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv1_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv1.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv1_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv1.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv2_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv2.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv2_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv2.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv3_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv3.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv3_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv3.anzahl }} {% endif %}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv4_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv4.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv4_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv4.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv5_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv5.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv5_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv5.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="hpv6_komponente" value="{% if document.data.hpv %} {{ document.data.hpv.hpv6.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="hpv6_anzahl" value="{% if document.data.hpv %} {{ document.data.hpv.hpv6.anzahl }} {% endif %}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 border">
+                    <p>UPV:</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv1_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv1.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv1_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv1.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv2_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv2.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv2_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv2.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv3_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv3.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv3_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv3.anzahl }} {% endif %}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv4_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv4.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv4_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv4.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv5_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv5.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv5_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv5.anzahl }} {% endif %}">
+                </div>
+                <div class="col-3 border">
+                    <input type="text" class="form-control value" id="upv6_komponente" value="{% if document.data.upv %} {{ document.data.upv.upv6.komponente }} {% endif %}">
+                </div>
+                <div class="col-1 border">
+                    <input type="text" class="form-control value" id="upv6_anzahl" value="{% if document.data.upv %} {{ document.data.upv.upv6.anzahl }} {% endif %}">
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="row">
+                <div class="col-12 border">
+                    <p><b>Anweisung</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung1" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung1 %} {{ document.data.anweisung.anweisung1 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung2" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung2 %} {{ document.data.anweisung.anweisung2 }} {% endif %}">
+                </div>
+                <div class="col-12 border"> 
+                    <input type="text" class="form-control value" id="anweisung3" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung3 %} {{ document.data.anweisung.anweisung3 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung4" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung4 %} {{ document.data.anweisung.anweisung4 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung5" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung5 %} {{ document.data.anweisung.anweisung5 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung6" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung6 %} {{ document.data.anweisung.anweisung6 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung7" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung7 %} {{ document.data.anweisung.anweisung7 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung8" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung8 %} {{ document.data.anweisung.anweisung8 }} {% endif %}">
+                </div>
+                <div class="col-12 border">
+                    <input type="text" class="form-control value" id="anweisung9" value="{% if document.data.anweisung is defined and document.data.anweisung.anweisung9 %} {{ document.data.anweisung.anweisung9 }} {% endif %}">
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="row text-center">
+                <div class="col-12">
+                    <p><b>Bemerkung und Information</b></p>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="container d-flex justify-content-center align-items-center flex-column" id="image_container">
+            </div>
+
+            <!-- Section 6 -->
+            <div class="row text-center edit-mode" id="dragArea">
+                <input type="file" accept="image/*" id="fileInput" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-upload" id="uploadIcon" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                </svg>
+                <p>Upload</p>
+            </div>
+        </div>
+
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-5">
+                    <img style="width: 212px; height: 35px;" src="{{ url_for('static', filename='img/pp-logo.png') }}" alt="">
+                </div>
+                <div class="col-2 text-center">
+                    <button class="btn btn-warning edit-mode" onclick="pdfErstellen()">PDF</button>
+                </div>
+                <div class="col-5 text-end">
+                    <button class="btn btn-secondary edit-mode" onclick="redirectToMainPage()">Zurück</button>
+                    <button class="btn btn-success edit-mode" onclick="updateDocument('{{ document_id }}')">Speichern</button>
+                    <button class="btn btn-danger edit-mode" onclick="deleteDocument('{{ document_id }}')">Löschen</button>
+                </div>
+            </div>
+        </div>
+        
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    </body>
+</html>

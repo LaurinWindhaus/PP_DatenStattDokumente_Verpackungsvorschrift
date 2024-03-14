@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./env:/.env
+    ports:
+      - "8097:80"
+    restart: always
+    environment:
+      - DATABASE_URL=mssql+pyodbc://${SQLSERVER_USER}:${SQLSERVER_PASSWORD}@${SQLSERVER_DB}?driver=ODBC+Driver+17+for+SQL+Server
+    networks:
+      - PPSTD_Extern_01
+
+networks:
+  PPSTD_Extern_01:
+    external: 
+        name: PPDEDocker1_Network_STD_01
