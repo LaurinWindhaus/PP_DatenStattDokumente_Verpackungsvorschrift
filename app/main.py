@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, g
 from core.database import init_db, Session
-from Models import Documents, Images
+from models import Documents, Images
 import requests
 
 # Initialize the database
