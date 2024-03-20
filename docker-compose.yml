@@ -10,6 +10,7 @@ services:
     restart: always
     environment:
       - DATABASE_URL=mssql+pyodbc://${SQLSERVER_USER}:${SQLSERVER_PASSWORD}@${SQLSERVER_DB}?driver=ODBC+Driver+17+for+SQL+Server
+      - ENVIRONMENT=PROD
     networks:
       - PPSTD_Extern_01
 

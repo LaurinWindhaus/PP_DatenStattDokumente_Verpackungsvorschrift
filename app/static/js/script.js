@@ -94,7 +94,7 @@ function saveFileToStorage(base64StringWithMimeType, width, height) {
 }
 
 function saveUrlToDocument(url, width, height) {
-    fetch("/dsd/image/upload", {
+    fetch("/dsd/images/upload", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -167,7 +167,7 @@ function loadImageToDocument(url, width, height) {
 
 async function deleteImageFromDocument(url) {
     try {
-        const response1 = await fetch("/dsd/image/delete", {
+        const response1 = await fetch("/dsd/images/delete", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -258,7 +258,7 @@ function updateDocumentInputValues(document_id) {
     data['anweisung']['anweisung8'] = document.getElementById('anweisung8').value.trim();
     data['anweisung']['anweisung9'] = document.getElementById('anweisung9').value.trim();
 
-    fetch("/dsd/document/update/"+document_id, {
+    fetch("/dsd/documents/update/"+document_id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -296,7 +296,7 @@ function updateDocumentImageValues(document_id) {
         }    
     }
     console.log(image_properties);
-    fetch("/dsd/image/update/"+document_id, {
+    fetch("/dsd/images/update/"+document_id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -333,7 +333,7 @@ async function deleteDocument(document_id) {
     });
     try {
         await Promise.all(imageDeletionPromises);
-        const response = await fetch("/dsd/document/delete/" + document_id, {
+        const response = await fetch("/dsd/documents/delete/" + document_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
