@@ -1,13 +1,5 @@
-from sqlalchemy import Column, Integer, String, JSON, UniqueConstraint, MetaData
+from sqlalchemy import Column, Integer, String, JSON, UniqueConstraint
 from .Base import Base
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
-
-metadata = MetaData(schema='dsd') if ENVIRONMENT == 'PROD' else MetaData()
 
 class Documents(Base):
     __tablename__ = 'T001_Documents'

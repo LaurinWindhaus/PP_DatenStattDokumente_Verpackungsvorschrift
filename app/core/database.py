@@ -7,15 +7,19 @@ import os
 load_dotenv()
 
 DATABASE_URL = os.getenv('DATABASE_URL')
+ENVIRONMENT = os.getenv('ENVIRONMENT')
 
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
 
 @event.listens_for(engine, "connect")
 def set_sqlite_pragma(dbapi_connection, connection_record):
-    cursor = dbapi_connection.cursor()
-    cursor.execute("PRAGMA foreign_keys=ON")
-    cursor.close()
+    if ENVIRONMENT == "DEV":
+        cursor = dbapi_connection.cursor()
+        try:
+            cursor.execute("PRAGMA foreign_keys=ON")
+        finally:
+            cursor.close()
 
 def init_db():
     Base.metadata.create_all(engine)

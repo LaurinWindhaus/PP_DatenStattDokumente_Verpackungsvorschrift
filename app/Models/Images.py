@@ -1,14 +1,6 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, MetaData
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from .Base import Base
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
-
-metadata = MetaData(schema='dsd') if ENVIRONMENT == 'PROD' else MetaData()
 
 class Images(Base):
     __tablename__ = 'T002_Images'

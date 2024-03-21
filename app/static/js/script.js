@@ -174,7 +174,7 @@ async function deleteImageFromDocument(url) {
             },
             body: JSON.stringify({
                 document_id: document_id,
-                image_url: url
+                url: url
             })
         });
         const data1 = await response1.json();
@@ -289,7 +289,7 @@ function updateDocumentImageValues(document_id) {
     for (var i = 0; i < images.length; i++) {
         if (images[i].tagName === "DIV") {
             image_properties.push({
-                "image_url": images[i].id,
+                "url": images[i].id,
                 "width": images[i].querySelector('div').style.width,
                 "height": images[i].querySelector('div').style.height
             });

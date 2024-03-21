@@ -5,7 +5,7 @@ from crud.image_crud import get_all_image_url, upload_image, update_image, delet
 from core.image_errors import ImageNotFoundError, DatabaseOperationError
 from core.document_errors import DocumentNotFoundError
 
-app = Blueprint('images', __name__, static_url_path='/dsd/static')
+app = Blueprint('images', __name__, static_folder='static')
 
 
 @app.before_request

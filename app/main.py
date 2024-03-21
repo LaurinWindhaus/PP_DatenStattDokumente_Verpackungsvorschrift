@@ -4,7 +4,7 @@ from api import document_api, image_api
 
 init_db()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/dsd/static')
 
 
 app.register_blueprint(document_api.app)

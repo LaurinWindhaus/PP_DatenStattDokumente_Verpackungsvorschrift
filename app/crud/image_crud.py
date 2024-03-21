@@ -35,8 +35,8 @@ def upload_image(db: Session, document_id: int, image_url: str, width: int, heig
 def update_image(db: Session, document_id: int, images: list) -> dict:
     for image in images:
         url = image.get('url')
-        width = image.get('width')
-        height = image.get('height')
+        width = int(float(image.get('width').replace("px", "")))
+        height = int(float(image.get('height').replace("px", "")))
 
         image_to_update = db.query(Images).filter(Images.document_id == document_id, Images.url == url).first()
         if not image_to_update:

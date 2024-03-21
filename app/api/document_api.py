@@ -6,7 +6,7 @@ from crud.image_crud import get_all_image_url
 from core.document_errors import DocumentNotFoundError, DatabaseOperationError
 
 
-app = Blueprint('documents', __name__, static_url_path='/dsd/static')
+app = Blueprint('documents', __name__, static_folder='static')
 
 
 @app.before_request
@@ -50,9 +50,9 @@ def create_document_route():
 
 @app.route('/dsd/documents/read/', methods=['GET'])
 def get_documents_route():
-    artikelnummer = request.args.get('artikelnummer')
+    artikelnummer = request.args.get('artikelnummer', default=None)
     documents = get_documents(g.session, artikelnummer)
-    return jsonify([DocumentCreateResponseSchema(**doc.to_dict()).model_dump() for doc in documents]), 20
+    return jsonify([DocumentCreateResponseSchema(**doc.to_dict()).model_dump() for doc in documents]), 200
 
 
 @app.route('/dsd/documents/update/<int:document_id>', methods=['PUT'])
